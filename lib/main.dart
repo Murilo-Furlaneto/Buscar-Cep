@@ -33,10 +33,11 @@ class _HomeState extends State<Home> {
     String logradouro = retorno['logradouro'];
     String cidade = retorno['localidade'];
     String bairro = retorno['bairro'];
+    String uf = retorno['uf'];
 
     setState(() {
       //atualiza os valores da variavel resultado
-      resultado = '$logradouro, $cidade,  $bairro';
+      resultado = '$logradouro, $cidade,  $bairro, $uf';
     });
   }
 
@@ -49,50 +50,49 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 200,
-              alignment: Alignment.topCenter,
-              child: Image.network(
-                'https://store-images.s-microsoft.com/image/apps.6607.13510798887520085.3b5999bd-0689-4a5d-b1fa-378e87bb83a5.ee076621-7430-46f1-a4ac-a0c442d69e58',
-                fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                height: 200,
+                alignment: Alignment.topCenter,
+                child: Image.asset('assets/cep.png'),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Digite o CEP ex: 1833400 ',
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Digite o CEP ex: 1833400 ',
+                  ),
+                  style: const TextStyle(fontSize: 20),
+                  controller: txtcep,
                 ),
-                style: const TextStyle(fontSize: 20),
-                controller: txtcep,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 26),
-              child: Center(
-                  child: Text('Resultado: $resultado',
-                      style: const TextStyle(fontSize: 20))),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: ElevatedButton(
-                  onPressed: _consultaCep,
-                  child: const Text('Consultar',
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                      )),
-                  style: ElevatedButton.styleFrom(primary: Colors.blue)),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 26),
+                child: Center(
+                    child: Text('Resultado: $resultado',
+                        style: const TextStyle(fontSize: 20))),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: ElevatedButton(
+                    onPressed: _consultaCep,
+                    child: const Text('Consultar',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        )),
+                    style: ElevatedButton.styleFrom(primary: Colors.blue)),
+              ),
+            ],
+          ),
         ),
       ),
     );
